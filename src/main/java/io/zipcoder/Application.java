@@ -14,7 +14,6 @@ public class Application {
      * Step 4. Print out the list at the end.
      */
     Integer numberOfPets = 0;
-    Map<Class,String> map;
     Pet_Francisco[] arrayPet = new Pet_Francisco[100];
 
     public void run() {
