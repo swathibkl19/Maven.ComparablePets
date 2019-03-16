@@ -3,9 +3,10 @@ package io.zipcoder;
 
 public abstract class Pet_Francisco {
 
-    private String name;
+    protected String name;
 
     public Pet_Francisco(){
+        this.name ="";
 
     }
 
