@@ -1,38 +1,55 @@
 package io.zipcoder;
 
 
-import io.zipcoder.io.zipcoder.pets.Pet_Swathi;
+import io.zipcoder.utilities.IOConsole;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Application {
-    String name;
-    public static void Main(String[] args) {
-        Pet_Swathi pet =new Pet_Swathi();
+    /**
+     * Step 1. Asks the user how many pets they have.
+     * Step 2. Ask them what kind of pet each one is.
+     * Step 3. Along with each pet's name.
+     * Step 4. Print out the list at the end.
+     */
+    Integer numberOfPets = 0;
+    Map<Class,String> map;
+    Pet_Francisco[] arrayPet = new Pet_Francisco[100];
 
-        System.out.println("Hello how many pets do uou have?" );
-        Scanner scan = new Scanner(System.in);
-        //String s = scan.next();
-        int i = scan.nextInt();
+    public void run() {
+        this.numberOfPets = IOConsole.getIOConsole().getIntegerInput("Hi! Please type in how many pet do you have: ");
+        througEachPet();
+        IOConsole.getIOConsole().println(printArray());
+    }
 
-        System.out.println("What are they?");
-        for (int j = 0; j < i; j++) {
-            String s = scan.nextLine();
-
-//            switch ( s = "Cat"){
-//                case :
-//                    System.out.println("enter your cat name" );
-//                    String s1 =scan.nextLine();
-//             switch (s ="Dog") {
-//
-//             }
-
- //           }
-
-
+    public void througEachPet(){
+        for (int i = 0; i < numberOfPets; i++) {
+            String typeOfPet = IOConsole.getIOConsole().getStringInput("Please enter the Pet's type: ");
+            PetSwitch petSwitch = new PetSwitch();
+            Pet_Francisco thePet = petSwitch
+                    .fromInput(typeOfPet
+                            .toUpperCase());
+            if (thePet instanceof Pet_Francisco){
+                String setTheName = IOConsole
+                        .getIOConsole()
+                        .getStringInput("Please enter the Pet's name: ");
+                thePet.setName(setTheName);
+                arrayPet[i] = thePet;
+            }
+            else {
+                i--;
+            }
         }
+    }
+
+    public String printArray(){
+        String str = "";
+        for (int i = 0; i < numberOfPets; i++) {
+            str +=  "You have a Pet which " + arrayPet[i].getClass()
+                    + " has a name " + arrayPet[i].getName() + "\n";
+        }
+        return str;
     }
 
 }
